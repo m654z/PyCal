@@ -19,7 +19,7 @@ n1 = []
 n2 = []
 loopCode = []
 iLoopTimes = []
-read = []
+readStr = []
 funcName = []
 funcCode = []
 funcTemp = []
@@ -56,7 +56,7 @@ def parse(cmd):
     global n2
     global loopCode
     global iLoopTimes
-    global read
+    global readStr
     global funcName
     global funcCode
     global funcTemp
@@ -98,7 +98,7 @@ def parse(cmd):
             read = []
 
         else:
-            read.append(cmd)
+            readStr.append(cmd)
 
     elif loopTimes == True:
         if cmd == "[":
