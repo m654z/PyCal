@@ -94,7 +94,7 @@ def parse(cmd):
     elif reading == True:
         if cmd == ";":
             reading = False
-            var = ''.join(read)
+            var = ''.join(readStr)
             read = []
 
         else:
