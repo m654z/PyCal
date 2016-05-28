@@ -257,6 +257,9 @@ def parse(cmd):
     elif cmd == "/":
         readingFuncName = True
 
+    elif cmd == "P":
+        print(generatePrimes(selectedInt))
+
 def fib(n):
     r = 0
     c = 1
@@ -268,6 +271,32 @@ def fib(n):
         c = r
         
     return r
+
+def isPrime(n):
+    if n == 2:
+        return True
+
+    elif n < 2 or not n % 2:
+        return False
+
+    for i in range(3, int(n ** 0.5 + 1), 2):
+        if not n % i: return False
+
+    return True
+
+def generatePrimes(n):
+    primes = [2,]
+    nOfPrimes = 1
+    test = 3
+
+    while nOfPrimes < n:
+        if isPrime(test):
+            primes.append(test)
+            nOfPrimes += 1
+
+        test += 2
+
+    return primes
 
 while 1:
     read(input("> "))
