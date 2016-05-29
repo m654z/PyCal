@@ -1,5 +1,6 @@
 import math
 import random
+import statistics
 
 ops = ["+", "-", "*", "/", "%"]
 rsi = False
@@ -12,7 +13,8 @@ reading = False
 readingFunc = False
 readingFunc2 = False
 readingFuncName = False
-selectedInt = 0
+readingListVal = False
+stats = False
 temp = []
 toEval = []
 n1 = []
@@ -23,6 +25,8 @@ readStr = []
 funcName = []
 funcCode = []
 funcTemp = []
+listVal = []
+returned = 0
 var = 0
 op = ""
 funcs = {}
@@ -31,7 +35,8 @@ def read(tokens):
     tokens = tokens.replace("!p", str(math.pi))
     tokens = tokens.replace("!e", str(math.e))
     tokens = tokens.replace("!h", "1.618033988749895")
-    tokens = tokens.replace("!R", str(random.randint(0, 100)))
+    tokens = tokens.replace("!r", str(random.randint(0, 100)))
+    tokens = tokens.replace("!R", str(random.randint(0, 1000)))
     tokens = list(tokens)
     for i in range(0, len(tokens)):
         parse(tokens[i])
@@ -49,7 +54,9 @@ def parse(cmd):
     global readingFunc
     global readingFunc2
     global readingFuncName
-    global selectedInt
+    global readingListVal
+    global stats
+    global var
     global temp
     global toEval
     global n1
@@ -60,9 +67,37 @@ def parse(cmd):
     global funcName
     global funcCode
     global funcTemp
+    global listVal
+    global returned
     global var
     global op
     global funcs
+    global read
+
+    if stats == True:
+        if cmd == "M":
+            var2 = var.split(",")
+            for i in range(len(var2)):
+                var2[i] = int(var2[i])
+                
+            returned = statistics.mean(var2)
+
+        elif cmd == "m":
+            var2 = var.split(",")
+            for i in range(len(var2)):
+                var2[i] = int(var2[i])
+                
+            returned = statistics.median(var2)
+
+        elif cmd == "O":
+            var2 = var.split(",")
+            for i in range(len(var2)):
+                var2[i] = int(var2[i])
+
+            returned = statistics.mode(var2)
+
+        elif cmd == ".":
+            stats = False
 
     if readingFuncName == True:
         if cmd == "_":
@@ -142,7 +177,7 @@ def parse(cmd):
     elif eval2 == True:
         if cmd == "}":
             eval2 = False
-            var = eval(''.join(n1) + op + ''.join(n2))
+            returned = eval(''.join(n1) + op + ''.join(n2))
             n1 = []
             n2 = []
             op = ""
@@ -160,18 +195,30 @@ def parse(cmd):
     elif rsi == True:
         if cmd == ")":
             rsi = False
-            selectedInt = int(''.join(temp))
+            try:
+                var = int(''.join(temp))
+
+            except ValueError:
+                try:
+                    var = float(''.join(temp))
+
+                except ValueError:
+                    var = str(''.join(temp))
+                
             temp = []
+
+        elif cmd == "i":
+            temp.append(input(">> "))
 
         else:
             temp.append(cmd)
 
     elif cmd == "F":
         if additionMode == True:
-            var += fib(selectedInt)
+            returned += fib(var)
 
         else:
-            var = fib(selectedInt)
+            returned = fib(var)
             
     elif cmd == "(":
         rsi = True
@@ -180,10 +227,10 @@ def parse(cmd):
         eval1 = True
 
     elif cmd == "+":
-        selectedInt += 1
+        var += 1
 
     elif cmd == "-":
-        selectedInt -= 1
+        var -= 1
 
     elif cmd == "[":
         loop = True
@@ -193,40 +240,43 @@ def parse(cmd):
 
     elif cmd == "S":
         if additionMode == True:
-            var += math.sqrt(selectedInt)
+            returned += math.sqrt(returned)
 
         else:
-            var = math.sqrt(selectedInt)
+            returned = math.sqrt(returned)
 
     elif cmd == "C":
         if additionMode == True:
-            var += math.ceil(selectedInt)
+            returned += math.ceil(returned)
 
         else:
-            var = math.ceil(selectedInt)
+            returned = math.ceil(returned)
 
     elif cmd == "f":
         if additionMode == True:
-            var += math.floor(selectedInt)
+            returned += math.floor(returned)
 
         else:
-            var = math.floor(selectedInt)
+            returned = math.floor(returned)
 
     elif cmd == "x":
         if additionMode == True:
-            var += math.factorial(selectedInt)
+            returned += math.factorial(returned)
 
         else:
-            var = math.factorial(selectedInt)
+            returned = math.factorial(returned)
 
     elif cmd == "E":
         if additionMode == True:
-            var += math.exp(selectedInt)
+            returned += math.exp(returned)
 
         else:
-            var = math.factorial(selectedInt)
+            returned = math.factorial(returned)
 
     elif cmd == "!":
+        print(returned)
+
+    elif cmd == "^":
         print(var)
 
     elif cmd == ".":
@@ -258,7 +308,10 @@ def parse(cmd):
         readingFuncName = True
 
     elif cmd == "P":
-        print(generatePrimes(selectedInt))
+        print(generatePrimes(var))
+
+    elif cmd == "s":
+        stats = True
 
 def fib(n):
     r = 0
