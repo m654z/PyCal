@@ -19,7 +19,7 @@ Examples
 
 **Output the first n prime numbers**
 
-``IP!``
+``IP``
 
 **Output pi**
 
