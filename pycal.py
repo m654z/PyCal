@@ -180,7 +180,7 @@ def parse(cmd):
         elif cmd == "¤":
             selectedVar += 1
 
-        elif cmd == "#:
+        elif cmd == "#":
             selectedVar -= 1
 
         else:
