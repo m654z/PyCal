@@ -177,8 +177,10 @@ def parse(cmd):
         elif cmd == "s":
             n1.append(int(variables[selectedVar]))
 
+        elif cmd == "¤":
             selectedVar += 1
 
+        elif cmd == "#:
             selectedVar -= 1
 
         else:
