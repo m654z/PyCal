@@ -15,7 +15,7 @@ Examples
 
 **Get the first n Fibonacci numbers**
 
-``*I[F+!]``
+``*i[F!+]``
 
 **Output the first n prime numbers**
 
@@ -24,6 +24,14 @@ Examples
 **Output pi**
 
 ``(!p)!``
+
+**Output a random number from 1 to 100**
+
+``(!R)!``
+
+**Output a random number between 0 and 1**
+
+``(!r)!``
 
 **Hello, world!**
 
