@@ -35,14 +35,13 @@ def read(tokens):
     tokens = tokens.replace("!p", str(math.pi))
     tokens = tokens.replace("!e", str(math.e))
     tokens = tokens.replace("!h", "1.618033988749895")
-    tokens = tokens.replace("!r", str(random.randint(0, 100)))
-    tokens = tokens.replace("!R", str(random.randint(0, 1000)))
+    tokens = tokens.replace("!r", str(random.random()))
+    tokens = tokens.replace("!R", str(random.randint(0, 100)))
     tokens = list(tokens)
     for i in range(0, len(tokens)):
         parse(tokens[i])
 
 def parse(cmd):
-
     global ops
     global rsi
     global eval1
@@ -68,6 +67,7 @@ def parse(cmd):
     global funcCode
     global funcTemp
     global listVal
+    global varTemp
     global returned
     global var
     global op
@@ -165,11 +165,21 @@ def parse(cmd):
             eval2 = True
             eval1 = False
 
-        elif cmd == "r":
+        elif cmd == "v":
             n1.append(str(var))
+
+        elif cmd == "r":
+            n1.append(str(returned))
 
         elif cmd == "i":
             n1.append(input(">> "))
+
+        elif cmd == "s":
+            n1.append(int(variables[selectedVar]))
+
+            selectedVar += 1
+
+            selectedVar -= 1
 
         else:
             n1.append(cmd)
@@ -240,38 +250,38 @@ def parse(cmd):
 
     elif cmd == "S":
         if additionMode == True:
-            returned += math.sqrt(returned)
+            returned += math.sqrt(var)
 
         else:
-            returned = math.sqrt(returned)
+            returned = math.sqrt(var)
 
     elif cmd == "C":
         if additionMode == True:
-            returned += math.ceil(returned)
+            returned += math.ceil(var)
 
         else:
-            returned = math.ceil(returned)
+            returned = math.ceil(var)
 
     elif cmd == "f":
         if additionMode == True:
-            returned += math.floor(returned)
+            returned += math.floor(var)
 
         else:
-            returned = math.floor(returned)
+            returned = math.floor(var)
 
     elif cmd == "x":
         if additionMode == True:
-            returned += math.factorial(returned)
+            returned += math.factorial(var)
 
         else:
-            returned = math.factorial(returned)
+            returned = math.factorial(var)
 
     elif cmd == "E":
         if additionMode == True:
-            returned += math.exp(returned)
+            returned += math.exp(var)
 
         else:
-            returned = math.factorial(returned)
+            returned = math.factorial(var)
 
     elif cmd == "!":
         print(returned)
