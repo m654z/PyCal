@@ -1,6 +1,9 @@
 import math
 import random
 import statistics
+import datetime
+import re
+import string
 
 ops = ["+", "-", "*", "/", "%"]
 rsi = False
@@ -285,6 +288,13 @@ def parse(cmd):
         else:
             returned = math.factorial(var)
 
+    elif cmd == "T":
+        t = str(datetime.datetime.now())[11:]
+        returned = t[:8]
+
+    elif cmd == "D":
+        returned = str(datetime.datetime.now())[:10]
+
     elif cmd == "!":
         print(returned)
 
@@ -320,11 +330,70 @@ def parse(cmd):
         readingFuncName = True
 
     elif cmd == "P":
-        print(generatePrimes(var))
+        returned = generatePrimes(var)
 
     elif cmd == "s":
         stats = True
 
+    elif cmd == "_":
+        returned = re.sub("[^0-9]", "", returned)
+
+    elif cmd == "½":
+        returned = var/2
+
+    elif cmd == "ö":
+        returned = returned[var]
+
+    elif cmd == "Ö":
+        var.append(var)
+
+    elif cmd == "ä":
+        returned = var.split()
+
+    elif cmd == "Ä":
+        var = returned.pop()
+
+    elif cmd == "´":
+        var = returned
+
+    elif cmd == "`":
+        returned = var
+
+    elif cmd == "=":
+        if var == returned:
+            returned = 1
+
+        else:
+            returned = 0
+
+    elif cmd == ">":
+        if var > returned:
+            returned = 1
+
+        else:
+            returned = 0
+
+    elif cmd == "<":
+        if var < returned:
+            returned = 1
+
+        else:
+            returned = 0
+
+    elif cmd == "0":
+        if var == 0:
+            returned = 1
+
+        else:
+            returned = 0
+
+    elif cmd == "1":
+        if var == 1:
+            returned = 1
+
+        else:
+            returned = 0
+        
 def fib(n):
     r = 0
     c = 1
