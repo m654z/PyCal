@@ -4,6 +4,7 @@ import statistics
 import datetime
 import re
 import string
+import time
 
 ops = ["+", "-", "*", "/", "%"]
 rsi = False
@@ -207,11 +208,14 @@ def parse(cmd):
             n2 = []
             op = ""
 
-        elif cmd == "r":
+        elif cmd == "v":
             n2.append(str(var))
 
         elif cmd == "i":
             n2.append(input(">> "))
+
+        elif cmd == "r":
+            n1.append(str(returned))
 
         else:
             n2.append(cmd)
@@ -296,7 +300,7 @@ def parse(cmd):
             returned += math.exp(var)
 
         else:
-            returned = math.factorial(var)
+            returned = math.exp(var)
 
     elif cmd == "T":
         t = str(datetime.datetime.now())[11:]
@@ -403,6 +407,9 @@ def parse(cmd):
 
         else:
             returned = 0
+
+    elif cmd == "¨":
+        time.sleep(1)
         
 def fib(n):
     r = 0
