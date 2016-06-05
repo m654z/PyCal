@@ -23,16 +23,16 @@ Examples
 
 **Output pi**
 
-``(!p)!``
+``(!p)^``
 
 **Output a random number from 1 to 100**
 
-``(!R)!``
+``(!R)^``
 
 **Output a random number between 0 and 1**
 
-``(!r)!``
+``(!r)^``
 
 **Hello, world!**
 
-``:Hello, world!;!``
+``:Hello, world!;^``
