@@ -1,0 +1,1 @@
+Search.setIndex({envversion:48,filenames:["index"],objects:{},objnames:{},objtypes:{},terms:{challeng:0,code:0,content:0,design:0,especi:0,golf:0,index:0,languag:0,math:0,modul:0,need:0,page:0,program:0,search:0},titles:["Welcome to PyCal&#8217;s documentation!"],titleterms:{document:0,indic:0,pycal:0,tabl:0,welcom:0}})

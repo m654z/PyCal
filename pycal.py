@@ -18,6 +18,7 @@ readingFunc2 = False
 readingFuncName = False
 readingListVal = False
 stats = False
+loopForever = False
 temp = []
 toEval = []
 n1 = []
@@ -58,6 +59,7 @@ def parse(cmd):
     global readingFuncName
     global readingListVal
     global stats
+    global loopForever
     global var
     global temp
     global toEval
@@ -149,15 +151,23 @@ def parse(cmd):
         elif cmd == "i":
             iLoopTimes.append(input(">> "))
 
+        elif cmd == "I":
+            loopForever = True
+
         else:
             iLoopTimes.append(cmd)
 
     elif loop == True:
         if cmd == "]":
             loop = False
-            
-            for i in range(0, int(''.join(iLoopTimes))):
-                read(''.join(loopCode))
+
+            if loopForever == True:
+                while 1:
+                    read(''.join(loopCode))
+
+            else:
+                for i in range(0, int(''.join(iLoopTimes))):
+                    read(''.join(loopCode))
 
         else:
             loopCode.append(cmd)
