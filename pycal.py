@@ -20,6 +20,7 @@ readingFuncName = False
 readingListVal = False
 stats = False
 loopForever = False
+readingT = False
 temp = []
 toEval = []
 n1 = []
@@ -38,7 +39,6 @@ funcs = {}
 
 def read(tokens):
     tokens = tokens.replace("!p", str(math.pi))
-    tokens = tokens.replace("!e", str(math.e))
     tokens = tokens.replace("!h", "1.618033988749895")
     tokens = tokens.replace("!r", str(random.random()))
     tokens = tokens.replace("!R", str(random.randint(0, 100)))
@@ -61,6 +61,7 @@ def parse(cmd):
     global readingListVal
     global stats
     global loopForever
+    global readingT
     global var
     global temp
     global toEval
@@ -79,6 +80,33 @@ def parse(cmd):
     global op
     global funcs
     global read
+
+    if readingT == True:
+        if cmd == "1":
+            returned = math.acos(var)
+
+        elif cmd == "2":
+            returned = math.asin(var)
+
+        elif cmd == "3":
+            returned = math.atan(var)
+
+        elif cmd == "4":
+            returned = math.atan2(var)
+
+        elif cmd == "5":
+            returned = math.cos(var)
+
+        elif cmd == "6":
+            returned = math.hypot(var)
+
+        elif cmd == "7":
+            returned = math.sin(var)
+
+        elif cmd == "8":
+            returned = math.tan(var)
+
+        readingT = False
 
     if stats == True:
         if cmd == "M":
@@ -394,22 +422,27 @@ def parse(cmd):
         else:
             returned = 0
 
-    elif cmd == "0":
-        if var == 0:
-            returned = 1
-
-        else:
-            returned = 0
-
-    elif cmd == "1":
-        if var == 1:
-            returned = 1
-
-        else:
-            returned = 0
-
     elif cmd == "¨":
         time.sleep(1)
+
+    elif cmd == "e":
+        even = []
+        for i in range(0, var):
+            even.append(i)
+            i += 2
+
+        result = even
+
+    elif cmd == "o":
+        odd = []
+        for i in range(1, var):
+            odd.append(i)
+            i += 2
+
+        result = odd
+
+    elif cmd == "~":
+        readingT = True
         
 def fib(n):
     r = 0
