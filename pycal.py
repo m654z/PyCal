@@ -39,7 +39,7 @@ funcs = {}
 
 def read(tokens):
     tokens = tokens.replace("!p", str(math.pi))
-    tokens = tokens.replace("!e, str(math.e)")
+    tokens = tokens.replace("!e", str(math.e))
     tokens = tokens.replace("!h", "1.618033988749895")
     tokens = tokens.replace("!r", str(random.random()))
     tokens = tokens.replace("!R", str(random.randint(0, 100)))
